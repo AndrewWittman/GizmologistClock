@@ -8,6 +8,7 @@
 #include <Numbers.h>
 #include <ClockFunction.h>
 #include <Servo.h>
+#include <Plane.h>
 
 Servo pen;
 
@@ -35,7 +36,13 @@ int startButton = 12; // Start button
 Stepper stepperLat = Stepper(stepPinLat, dirPinLat); // X stepper
 Stepper stepperLong = Stepper(stepPinLong, dirPinLong); // Y stepper
 
-//Plane hourHighPlace = Plane(0,, 100, 600); // Plane for the hour high digit
+Plane hourHighPlace = Plane(56, 377, 20, 686); // Plane for the hour high digit
+Plane hourLowPlace = Plane(526, 851, 20, 686); // Plane for the hour low digit
+
+Plane minuteHighPlace = Plane(1014, 1331, 20, 686); // Plane for the minute high digit
+Plane minuteLowPlace = Plane(1495, 1762, 20, 686); // Plane for the minute-low digit
+
+Numbers nums;
 
 
 void setup() {
@@ -56,23 +63,22 @@ void setup() {
   pinMode(longLowSwitch, INPUT);
 
 
-//  while(!digitalRead(startButton)) {
-//    digitalWrite(blueLED, HIGH);
-//    delay(100);
-//    digitalWrite(blueLED, LOW);
-//    delay(100);
-//  }
-//
-//  delay(20);
-
   // Calibrate the stepper motors
-
-
+  
+  stepperLong.calibrateOne(longLowSwitch);
   stepperLat.calibrate(latLowSwitch, latHighSwitch);
+  
+  delay(500);
+  nums.draw0(stepperLat,stepperLong, hourHighPlace, stepperLat.getPos(), stepperLong.getPos());
+  delay(500);
+  nums.draw0(stepperLat,stepperLong, hourLowPlace, stepperLat.getPos(), stepperLong.getPos());
+  delay(500);
+  nums.draw0(stepperLat,stepperLong, minuteHighPlace, stepperLat.getPos(), stepperLong.getPos());
+  delay(500);
+  nums.draw0(stepperLat,stepperLong, minuteLowPlace, stepperLat.getPos(), stepperLong.getPos());
   Serial.print(stepperLat._maxPosition);
 
 
-//  stepperLong.calibrateOne(longLowSwitch);
 
 
 //

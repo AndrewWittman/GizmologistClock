@@ -32,4 +32,5 @@ void ClockFunction::begin() {
     pinMode(_latHighSwitch, INPUT);
     pinMode(_longLowSwitch, INPUT);
     pinMode(_longHighSwitch, INPUT);
+    
 }

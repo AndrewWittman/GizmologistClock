@@ -10,17 +10,25 @@
 #include <Plane.h>
 #include <Stepper.h>
 
-void Numbers::draw0(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY) {
+void Numbers::draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY) {
 //  int width = numPlace.getWidth();
 //  int height = numPlace.getHeight();
 
 //  int relWidth = 100 * (width / height);
 //  int relHeight = 100;
-
-  relativeMove(motorX, motorY, numPlace, 15, 15);
+  relativeMove(motorX, motorY, numPlace, 10, 10);
+  delay(50);
+  // servo down
+  relativeMove(motorX, motorY, numPlace, 10, 90);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 90);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 10);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 10, 10);
 }
 
-void Numbers::relativeMoveX(Stepper motorX, Plane numPlace, int relX) {
+void Numbers::relativeMoveX(Stepper &motorX, Plane numPlace, int relX) {
   int width = numPlace.getWidth();
   int height = numPlace.getHeight();
   int relWidth = 100 * (width / height);
@@ -29,16 +37,18 @@ void Numbers::relativeMoveX(Stepper motorX, Plane numPlace, int relX) {
 
 }
 
-void Numbers::relativeMove(Stepper motorX, Stepper motorY, Plane numPlace, int relX, int relY) {
-  int width = numPlace.getWidth();
-  int height = numPlace.getHeight();
 
-  int relWidth = 100 * (width / height);
-  int relHeight = 100;
+void Numbers::relativeMove(Stepper &motorX, Stepper &motorY, Plane numPlace, int relX, int relY) {
+  float width = numPlace.getWidth();
+  float height = numPlace.getHeight();
 
-  int absX = ((relX / relWidth) * width) + numPlace.getXMin();
-  int absY = ((relY / relHeight) * height) + numPlace.getYMin();
+  // Convert percentages (0–100) to absolute positions
+  float absX = numPlace.getXMin() + (relX / 100.0f) * width;
+  float absY = numPlace.getYMin() + (relY / 100.0f) * height;
 
-  motorX.moveTo(absX);
-  motorY.moveTo(absY);
+  Serial.print("Moving to X: "); Serial.print(absX);
+  Serial.print(", Y: "); Serial.println(absY);
+
+  motorX.moveTo((int)absX);
+  motorY.moveTo((int)absY);
 }

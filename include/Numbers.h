@@ -14,8 +14,8 @@
 class Numbers
 {
 public:
-    void static draw0(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
-    void static relativeMoveX(Stepper motorX, Plane numPlace, int relX);
+    void static draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY);
+    void static relativeMoveX(Stepper &motorX, Plane numPlace, int relX);
 //    void draw1(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
 //    void draw2(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
 //    void draw3(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
@@ -26,7 +26,7 @@ public:
 //    void draw8(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
 //    void draw9(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
 private:
-    void static relativeMove(Stepper motorX, Stepper motorY, Plane numPlace, int relX, int relY);
+    void static relativeMove(Stepper &motorX, Stepper &motorY, Plane numPlace, int relX, int relY);
 };
 
 #endif //GIZMOCLOCK_LETTERS_H
