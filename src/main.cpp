@@ -36,11 +36,11 @@ int startButton = 12; // Start button
 Stepper stepperLat = Stepper(stepPinLat, dirPinLat); // X stepper
 Stepper stepperLong = Stepper(stepPinLong, dirPinLong); // Y stepper
 
-Plane hourHighPlace = Plane(56, 377, 20, 686); // Plane for the hour high digit
-Plane hourLowPlace = Plane(526, 851, 20, 686); // Plane for the hour low digit
+Plane hourHighPlace = Plane(96, 417, 0, 560); // Plane for the hour high digit
+Plane hourLowPlace = Plane(576, 901, 0, 560); // Plane for the hour low digit
 
-Plane minuteHighPlace = Plane(1014, 1331, 20, 686); // Plane for the minute high digit
-Plane minuteLowPlace = Plane(1495, 1762, 20, 686); // Plane for the minute-low digit
+Plane minuteHighPlace = Plane(1074, 1391, 0, 560); // Plane for the minute high digit
+Plane minuteLowPlace = Plane(1565, 1832, 0, 560); // Plane for the minute-low digit
 
 Numbers nums;
 
