@@ -9,12 +9,12 @@
 #include <Arduino.h>
 #include <Plane.h>
 #include <Stepper.h>
-//#include <Servo.h>
+#include <Servo.h>
 
 class Numbers
 {
 public:
-    void static draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY);
+    void static draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
     void static relativeMoveX(Stepper &motorX, Plane numPlace, int relX);
 //    void draw1(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
 //    void draw2(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);

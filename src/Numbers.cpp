@@ -9,23 +9,24 @@
 #include <Numbers.h>
 #include <Plane.h>
 #include <Stepper.h>
+#include <Servo.h>
 
-void Numbers::draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY) {
-//  int width = numPlace.getWidth();
-//  int height = numPlace.getHeight();
-
-//  int relWidth = 100 * (width / height);
-//  int relHeight = 100;
+void Numbers::draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
   relativeMove(motorX, motorY, numPlace, 10, 10);
-  delay(50);
-  // servo down
+  pen.write(150);
+  delay(200);
   relativeMove(motorX, motorY, numPlace, 10, 90);
+  pen.write(150);
   delay(50);
   relativeMove(motorX, motorY, numPlace, 90, 90);
+  pen.write(150);
   delay(50);
   relativeMove(motorX, motorY, numPlace, 90, 10);
+  pen.write(152);
   delay(50);
   relativeMove(motorX, motorY, numPlace, 10, 10);
+  pen.write(110);
+  delay(50);
 }
 
 void Numbers::relativeMoveX(Stepper &motorX, Plane numPlace, int relX) {

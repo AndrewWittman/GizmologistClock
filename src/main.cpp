@@ -13,6 +13,8 @@
 Servo pen;
 
 int penPos = 20;
+int penUp = 110;
+int penDown = 145;
 
 // Pins for the stepper motors
 int dirPinLat = 2; // X direction pin
@@ -36,11 +38,11 @@ int startButton = 12; // Start button
 Stepper stepperLat = Stepper(stepPinLat, dirPinLat); // X stepper
 Stepper stepperLong = Stepper(stepPinLong, dirPinLong); // Y stepper
 
-Plane hourHighPlace = Plane(96, 417, 0, 560); // Plane for the hour high digit
-Plane hourLowPlace = Plane(576, 901, 0, 560); // Plane for the hour low digit
+Plane hourHighPlace = Plane(86, 397, 0, 560); // Plane for the hour high digit
+Plane hourLowPlace = Plane(556, 881, 0, 560); // Plane for the hour low digit
 
-Plane minuteHighPlace = Plane(1074, 1391, 0, 560); // Plane for the minute high digit
-Plane minuteLowPlace = Plane(1565, 1832, 0, 560); // Plane for the minute-low digit
+Plane minuteHighPlace = Plane(1054, 1371, 0, 560); // Plane for the minute high digit
+Plane minuteLowPlace = Plane(1545, 1812, 0, 560); // Plane for the minute-low digit
 
 Numbers nums;
 
@@ -52,6 +54,8 @@ void setup() {
   pinMode(stepPinLong, OUTPUT);
   pinMode(dirPinLat, OUTPUT);
   pinMode(dirPinLong, OUTPUT);
+  pen.attach(penServoPin);
+
 
 //  pen.attach(penServoPin);
 
@@ -64,28 +68,28 @@ void setup() {
 
 
   // Calibrate the stepper motors
-  
+  delay(500);
+  penPos = 110;  
+  pen.write(penPos);
+
   stepperLong.calibrateOne(longLowSwitch);
   stepperLat.calibrate(latLowSwitch, latHighSwitch);
-  
+
+
   delay(500);
-  nums.draw0(stepperLat,stepperLong, hourHighPlace, stepperLat.getPos(), stepperLong.getPos());
+  nums.draw0(stepperLat,stepperLong, hourHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
-  nums.draw0(stepperLat,stepperLong, hourLowPlace, stepperLat.getPos(), stepperLong.getPos());
+  nums.draw0(stepperLat,stepperLong, hourLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
-  nums.draw0(stepperLat,stepperLong, minuteHighPlace, stepperLat.getPos(), stepperLong.getPos());
+  nums.draw0(stepperLat,stepperLong, minuteHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
-  nums.draw0(stepperLat,stepperLong, minuteLowPlace, stepperLat.getPos(), stepperLong.getPos());
+  nums.draw0(stepperLat,stepperLong, minuteLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   Serial.print(stepperLat._maxPosition);
 
 
 
 
-//
-//  penPos = 85;
-//  pen.write(penPos);
-//
-//  pen.write(150);
+
 
 
 }
