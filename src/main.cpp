@@ -83,18 +83,23 @@ void setup() {
   stepperLat.calibrate(latLowSwitch, latHighSwitch);
 
   //erase
-  //digitalWrite(minLow,1);
-  //digitalWrite(minHigh,1);
-  //digitalWrite(hourLow,1);
-  //digitalWrite(hourHigh,1);
+  digitalWrite(minLow,1);
+  digitalWrite(minHigh,1);
+  digitalWrite(hourLow,1);
+  digitalWrite(hourHigh,1);
+  delay(200);
+  digitalWrite(minLow,0);
+  digitalWrite(minHigh,0);
+  digitalWrite(hourLow,0);
+  digitalWrite(hourHigh,0);
   delay(500);
-  //nums.draw1(stepperLat,stepperLong, hourHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
+  nums.draw1(stepperLat,stepperLong, hourHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
-  nums.draw2(stepperLat,stepperLong, hourLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
+  nums.draw5(stepperLat,stepperLong, hourLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
-  //nums.draw2(stepperLat,stepperLong, minuteHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
+  nums.draw2(stepperLat,stepperLong, minuteHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
-  //nums.draw0(stepperLat,stepperLong, minuteLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
+  nums.draw1(stepperLat,stepperLong, minuteLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   Serial.print(stepperLat._maxPosition);
 
 

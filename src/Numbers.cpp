@@ -30,10 +30,9 @@ void Numbers::draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int curren
 }
 void Numbers::draw1(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
     relativeMove(motorX, motorY, numPlace, 10, 90);
-    pen.write(150);
+    pen.write(152);
     delay(200);
     relativeMove(motorX, motorY, numPlace, 10, 10);
-    pen.write(150);
     delay(50);    
     pen.write(110);
     delay(200);
@@ -97,12 +96,13 @@ void Numbers::draw5(Stepper &motorX, Stepper &motorY, Plane numPlace, int curren
   delay(50);
   relativeMove(motorX, motorY, numPlace, 10, 90);
   delay(50);
-  relativeMove(motorX, motorY, numPlace, 10, 65);
+  relativeMove(motorX, motorY, numPlace, 10, 50);
   delay(50);
-  relativeMove(motorX, motorY, numPlace, 90, 65);
+  relativeMove(motorX, motorY, numPlace, 90, 50);
   delay(50);
   relativeMove(motorX, motorY, numPlace, 90, 10);
   delay(50);
+  pen.write(152);
   relativeMove(motorX, motorY, numPlace, 10, 10);
   pen.write(110);
   delay(50);
