@@ -13,20 +13,137 @@
 
 void Numbers::draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
   relativeMove(motorX, motorY, numPlace, 10, 10);
-  pen.write(150);
+  pen.write(147);
   delay(200);
+  relativeMove(motorX, motorY, numPlace, 10, 90);
+  pen.write(147);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 90);
+  pen.write(147);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 10);
+  pen.write(147);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 10, 10);
+  pen.write(110);
+  delay(200);
+}
+void Numbers::draw1(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
+    relativeMove(motorX, motorY, numPlace, 10, 90);
+    pen.write(150);
+    delay(200);
+    relativeMove(motorX, motorY, numPlace, 10, 10);
+    pen.write(150);
+    delay(50);    
+    pen.write(110);
+    delay(200);
+}
+void Numbers::draw2(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
+    relativeMove(motorX, motorY, numPlace, 90, 10);
+    pen.write(152);
+    delay(200);
+    relativeMove(motorX, motorY, numPlace, 10, 10);
+    pen.write(150);
+    delay(50);    
+    relativeMove(motorX, motorY, numPlace, 10, 50);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 90, 50);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 90, 90);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 10, 90);
+    delay(50);
+    pen.write(130);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 10, 80);
+    pen.write(110);
+    delay(200);
+}
+void Numbers::draw3(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen){
   relativeMove(motorX, motorY, numPlace, 10, 90);
   pen.write(150);
   delay(50);
   relativeMove(motorX, motorY, numPlace, 90, 90);
-  pen.write(150);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 50);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 50, 50);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 50);
   delay(50);
   relativeMove(motorX, motorY, numPlace, 90, 10);
-  pen.write(152);
   delay(50);
   relativeMove(motorX, motorY, numPlace, 10, 10);
   pen.write(110);
   delay(50);
+}
+void Numbers::draw4(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen){
+  relativeMove(motorX, motorY, numPlace, 10, 90);
+  pen.write(150);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 10, 50);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 50);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 90);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 10);
+  pen.write(110);
+  delay(50);
+}
+void Numbers::draw5(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen){
+  relativeMove(motorX, motorY, numPlace, 90, 90);
+  pen.write(150);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 10, 90);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 10, 65);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 65);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 90, 10);
+  delay(50);
+  relativeMove(motorX, motorY, numPlace, 10, 10);
+  pen.write(110);
+  delay(50);
+}
+
+
+void Numbers::draw7(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
+    relativeMove(motorX, motorY, numPlace, 90, 10);
+    pen.write(152);
+    delay(200);
+    relativeMove(motorX, motorY, numPlace, 10, 10);
+    pen.write(150);
+    delay(50);    
+    relativeMove(motorX, motorY, numPlace, 10, 90);
+    delay(10);
+    relativeMove(motorX, motorY, numPlace, 10, 80);
+    pen.write(110);
+    delay(200);
+}
+void Numbers::draw8(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
+    relativeMove(motorX, motorY, numPlace, 10, 10);
+    pen.write(150);
+    delay(200);
+    relativeMove(motorX, motorY, numPlace, 10, 50);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 90, 50);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 90, 90);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 10, 90);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 10, 50);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 90, 50);
+    delay(50);
+    relativeMove(motorX, motorY, numPlace, 90, 10);
+    delay(50);
+    pen.write(152);
+    relativeMove(motorX, motorY, numPlace, 10, 10);
+    pen.write(110);
+    delay(50);
 }
 
 void Numbers::relativeMoveX(Stepper &motorX, Plane numPlace, int relX) {
