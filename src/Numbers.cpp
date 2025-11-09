@@ -107,7 +107,39 @@ void Numbers::draw5(Stepper &motorX, Stepper &motorY, Plane numPlace, int curren
   pen.write(110);
   delay(50);
 }
+void Numbers::draw6(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen){
+  // Start top-right
+  relativeMove(motorX, motorY, numPlace, 90, 90);
+  pen.write(150);
+  delay(50);
 
+  // Draw top horizontal
+  relativeMove(motorX, motorY, numPlace, 10, 90);
+  delay(50);
+
+  // Draw left vertical down to bottom
+  relativeMove(motorX, motorY, numPlace, 10, 10);
+  delay(50);
+
+  // Draw bottom horizontal
+  relativeMove(motorX, motorY, numPlace, 90, 10);
+  delay(50);
+
+  // Draw inner curve up to middle
+  relativeMove(motorX, motorY, numPlace, 90, 50);
+  delay(50);
+
+  // Draw inner horizontal back left
+  relativeMove(motorX, motorY, numPlace, 50, 50);
+  delay(50);
+
+  // Back to right mid
+  relativeMove(motorX, motorY, numPlace, 90, 50);
+  delay(50);
+
+  pen.write(110);
+  delay(50);
+}
 
 void Numbers::draw7(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen) {
     relativeMove(motorX, motorY, numPlace, 90, 10);
@@ -144,6 +176,40 @@ void Numbers::draw8(Stepper &motorX, Stepper &motorY, Plane numPlace, int curren
     relativeMove(motorX, motorY, numPlace, 10, 10);
     pen.write(110);
     delay(50);
+}
+
+void Numbers::draw9(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen){
+  // Start bottom-left
+  relativeMove(motorX, motorY, numPlace, 10, 10);
+  pen.write(150);
+  delay(50);
+
+  // Bottom horizontal
+  relativeMove(motorX, motorY, numPlace, 90, 10);
+  delay(50);
+
+  // Right vertical up to top
+  relativeMove(motorX, motorY, numPlace, 90, 90);
+  delay(50);
+
+  // Top horizontal
+  relativeMove(motorX, motorY, numPlace, 10, 90);
+  delay(50);
+
+  // Inner curve down to middle
+  relativeMove(motorX, motorY, numPlace, 10, 50);
+  delay(50);
+
+  // Inner horizontal to the right
+  relativeMove(motorX, motorY, numPlace, 50, 50);
+  delay(50);
+
+  // Back left to middle (to close the loop)
+  relativeMove(motorX, motorY, numPlace, 10, 50);
+  delay(50);
+
+  pen.write(110);
+  delay(50);
 }
 
 void Numbers::relativeMoveX(Stepper &motorX, Plane numPlace, int relX) {

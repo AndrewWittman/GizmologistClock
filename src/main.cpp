@@ -9,6 +9,8 @@
 #include <ClockFunction.h>
 #include <Servo.h>
 #include <Plane.h>
+//#include <RTClib.h>
+
 
 Servo pen;
 
@@ -100,6 +102,10 @@ void setup() {
   nums.draw2(stepperLat,stepperLong, minuteHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
   nums.draw1(stepperLat,stepperLong, minuteLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
+  delay(500);
+
+  stepperLat.moveTo(20);
+
   Serial.print(stepperLat._maxPosition);
 
 
