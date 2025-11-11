@@ -34,3 +34,4 @@ void ClockFunction::begin() {
     pinMode(_longHighSwitch, INPUT);
     
 }
+

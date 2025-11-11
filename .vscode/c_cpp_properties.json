@@ -10,13 +10,15 @@
             "includePath": [
                 "C:/Users/Andre/GizmologistClock/include",
                 "C:/Users/Andre/GizmologistClock/src",
+                "C:/Users/Andre/GizmologistClock/.pio/libdeps/nanoatmega328new/RTClib/src",
+                "C:/Users/Andre/GizmologistClock/.pio/libdeps/nanoatmega328new/Adafruit BusIO",
+                "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 "C:/Users/Andre/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "C:/Users/Andre/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs",
                 "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/HID/src",
-                "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 ""
             ],
             "browse": {
@@ -24,13 +26,15 @@
                 "path": [
                     "C:/Users/Andre/GizmologistClock/include",
                     "C:/Users/Andre/GizmologistClock/src",
+                    "C:/Users/Andre/GizmologistClock/.pio/libdeps/nanoatmega328new/RTClib/src",
+                    "C:/Users/Andre/GizmologistClock/.pio/libdeps/nanoatmega328new/Adafruit BusIO",
+                    "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     "C:/Users/Andre/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "C:/Users/Andre/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs",
                     "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/HID/src",
-                    "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                     "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                    "C:/Users/Andre/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     ""
                 ]
             },

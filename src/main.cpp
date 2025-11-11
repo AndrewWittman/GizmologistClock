@@ -9,10 +9,17 @@
 #include <ClockFunction.h>
 #include <Servo.h>
 #include <Plane.h>
-//#include <RTClib.h>
-
 
 Servo pen;
+
+int lastMinute = -1;
+int lastHour   = -1;
+
+unsigned long lastMinuteTick = 0;     // last time we advanced the minute (ms)
+const unsigned long minuteMs = 60000; // 60,000 ms in a minute
+
+int curHour = 12;   // starting hour (12h format or 24h, your call)
+int curMinute = 0;  // starting minute
 
 int penPos = 20;
 int penUp = 110;
@@ -30,8 +37,6 @@ int minLow = 8 ;
 
 int penServoPin = 9; // Pen servo pin
 
-int blueLED = 7; // Blue LED pin
-
 int latLowSwitch = 10; // X low limit switch
 int latHighSwitch = 11; // X high limit switch
 
@@ -43,14 +48,25 @@ int longLowSwitch = 13; // Y low limit switch
 Stepper stepperLat = Stepper(stepPinLat, dirPinLat); // X stepper
 Stepper stepperLong = Stepper(stepPinLong, dirPinLong); // Y stepper
 
-Plane hourHighPlace = Plane(86, 397, 0, 560); // Plane for the hour high digit
-Plane hourLowPlace = Plane(556, 881, 0, 560); // Plane for the hour low digit
+Plane minuteLowPlace = Plane(86, 397, 0, 560); // Plane for the minute low digit
+Plane minuteHighPlace = Plane(556, 881, 0, 560); // Plane for the minute high digit
 
-Plane minuteHighPlace = Plane(1054, 1371, 0, 560); // Plane for the minute high digit
-Plane minuteLowPlace = Plane(1545, 1812, 0, 560); // Plane for the minute-low digit
+Plane hourLowPlace = Plane(1054, 1371, 0, 560); // Plane for the hour low digit
+Plane hourHighPlace = Plane(1545, 1812, 0, 560); // Plane for the hour high digit
 
 Numbers nums;
 
+void clearDigitSelect();
+void selectDigit(int pin);
+void drawDigit(Numbers &nums, int digit,
+               Stepper &stepperLat, Stepper &stepperLong,
+               Plane place, Servo &pen);
+void drawTime(Numbers &nums,
+              int hour,
+              int minute,
+              Stepper &stepperLat,
+              Stepper &stepperLong,
+              Servo &pen);
 
 void setup() {
   Serial.begin(9600);
@@ -66,10 +82,6 @@ void setup() {
   pinMode(hourHigh, OUTPUT);
   pen.attach(penServoPin);
 
-
-//  pen.attach(penServoPin);
-
-
   // Set the pin modes for the limit switches
   pinMode(latLowSwitch, INPUT);
   pinMode(latHighSwitch, INPUT);
@@ -84,37 +96,166 @@ void setup() {
   stepperLong.calibrateOne(longLowSwitch);
   stepperLat.calibrate(latLowSwitch, latHighSwitch);
 
-  //erase
-  digitalWrite(minLow,1);
-  digitalWrite(minHigh,1);
-  digitalWrite(hourLow,1);
+  /*
   digitalWrite(hourHigh,1);
   delay(200);
-  digitalWrite(minLow,0);
-  digitalWrite(minHigh,0);
-  digitalWrite(hourLow,0);
   digitalWrite(hourHigh,0);
   delay(500);
   nums.draw1(stepperLat,stepperLong, hourHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
   delay(500);
-  nums.draw5(stepperLat,stepperLong, hourLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
-  delay(500);
-  nums.draw2(stepperLat,stepperLong, minuteHighPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
-  delay(500);
-  nums.draw1(stepperLat,stepperLong, minuteLowPlace, stepperLat.getPos(), stepperLong.getPos(), pen);
-  delay(500);
+  */
 
   stepperLat.moveTo(20);
+  
+  lastHour = curHour;
+  lastMinute = curMinute;
+  lastMinuteTick = millis();
 
+  Serial.print("Starting software clock at ");
+  Serial.print(curHour);
+  Serial.print(":");
+  if (curMinute < 10) Serial.print('0');
+  Serial.println(curMinute);
+
+  // Draw initial time
+  drawTime(nums, curHour, curMinute, stepperLat, stepperLong, pen);
   Serial.print(stepperLat._maxPosition);
-
-
-
-
 
 
 
 }
 
 void loop() {
+  static unsigned long lastPrint = 0;
+  unsigned long nowMs = millis();
+
+  // Advance software time every minute
+  if (nowMs - lastMinuteTick >= minuteMs) {
+    lastMinuteTick += minuteMs;  // handles drift/wrap better than = nowMs
+
+    curMinute++;
+    if (curMinute >= 60) {
+      curMinute = 0;
+      curHour++;
+      if (curHour >= 24) curHour = 0;  // 24h wrap; drawTime converts to 12h
+    }
+
+    // Recalibrate every 10 minutes
+    if (curMinute % 10 == 0) {
+      pen.write(penUp);
+      delay(200);
+      stepperLong.calibrateOne(longLowSwitch);
+      stepperLat.calibrate(latLowSwitch, latHighSwitch);
+    }
+
+    Serial.print("Updating display for time ");
+    if (curHour < 10) Serial.print('0');
+    Serial.print(curHour);
+    Serial.print(':');
+    if (curMinute < 10) Serial.print('0');
+    Serial.println(curMinute);
+
+    drawTime(nums, curHour, curMinute, stepperLat, stepperLong, pen);
+
+    lastHour = curHour;
+    lastMinute = curMinute;
+  }
+
+  // Optional: print current software time once per second for debug
+  if (nowMs - lastPrint >= 1000) {
+    lastPrint = nowMs;
+    Serial.print("Software Time: ");
+    if (curHour < 10) Serial.print('0');
+    Serial.print(curHour);
+    Serial.print(':');
+    if (curMinute < 10) Serial.print('0');
+    Serial.print(curMinute);
+    Serial.print(" (ms=");
+    Serial.print(nowMs);
+    Serial.println(")");
+  }
+}
+
+void clearDigitSelect() {
+  digitalWrite(minLow, LOW);
+  digitalWrite(minHigh, LOW);
+  digitalWrite(hourLow, LOW);
+  digitalWrite(hourHigh, LOW);
+}
+
+void selectDigit(int pin) {
+  clearDigitSelect();
+  if (pin >= 0) {
+    digitalWrite(pin, HIGH);
+  }
+}
+
+void drawDigit(Numbers &nums,
+               int digit,
+               Stepper &stepperLat,
+               Stepper &stepperLong,
+               Plane place,
+               Servo &pen)
+{
+  switch (digit) {
+    case 0: nums.draw0(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 1: nums.draw1(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 2: nums.draw2(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 3: nums.draw3(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 4: nums.draw4(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 5: nums.draw5(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 6: nums.draw6(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 7: nums.draw7(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 8: nums.draw8(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 9: nums.draw9(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+  }
+}
+
+void drawTime(Numbers &nums,
+              int hour,
+              int minute,
+              Stepper &stepperLat,
+              Stepper &stepperLong,
+              Servo &pen)
+{
+  // Convert 24h -> 12h for display
+  if (hour == 0) {
+    hour = 12;        // 00:xx -> 12:xx AM
+  } else if (hour > 12) {
+    hour -= 12;       // 13–23 -> 1–11 PM
+  }
+
+  int hTens = hour / 10;     // 0 or 1 for 1–12
+  int hOnes = hour % 10;
+  int mTens = minute / 10;
+  int mOnes = minute % 10;
+
+  // --- Hour tens (leftmost) ---
+  // Only draw if non-zero (i.e., 10, 11, 12 -> 1)
+  if (hTens > 0) {
+    selectDigit(hourHigh);
+    drawDigit(nums, hTens, stepperLat, stepperLong, hourHighPlace, pen);
+    delay(200);
+  } else {
+    // Just ensure selector LEDs off; we do NOT draw a 0 here.
+    clearDigitSelect();
+  }
+
+  // --- Hour ones ---
+  selectDigit(hourLow);
+  drawDigit(nums, hOnes, stepperLat, stepperLong, hourLowPlace, pen);
+  delay(200);
+
+  // --- Minute tens ---
+  selectDigit(minHigh);
+  drawDigit(nums, mTens, stepperLat, stepperLong, minuteHighPlace, pen);
+  delay(200);
+
+  // --- Minute ones ---
+  selectDigit(minLow);
+  drawDigit(nums, mOnes, stepperLat, stepperLong, minuteLowPlace, pen);
+  delay(200);
+
+  clearDigitSelect();
+  pen.write(penUp);  // make sure pen is up at end
 }
