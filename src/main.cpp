@@ -18,7 +18,7 @@ int lastHour   = -1;
 unsigned long lastMinuteTick = 0;     // last time we advanced the minute (ms)
 const unsigned long minuteMs = 60000; // 60,000 ms in a minute
 
-int curHour = 4;   // starting hour (12h format or 24h, your call)
+int curHour = 4;   // starting hour
 int curMinute = 39;  // starting minute
 
 int penPos = 20;
@@ -28,14 +28,14 @@ int penDown = 145;
 // Pins for the stepper motors
 int dirPinLat = 2; // X direction pin
 int stepPinLat = 3; // X step pin
-int dirPinLong = 4; // Y direction pin
-int stepPinLong = 5; // Y step pin
-int hourHigh = 6 ;
+int dirPinLong = 5; // Y direction pin, change to 4 for breadboard
+int stepPinLong = 6; // Y step pin, change to 5 for breadboard
+int hourHigh = 4 ; 
 int hourLow = 7 ;
-int minHigh = 12 ;
+int minHigh = 9 ; //switch to 12 on breadboard
 int minLow = 8 ;
 
-int penServoPin = 9; // Pen servo pin
+int penServoPin = 12; // Pen servo pin, switch to 9 on breadboard
 
 int latLowSwitch = 10; // X low limit switch
 int latHighSwitch = 11; // X high limit switch
@@ -212,16 +212,16 @@ void drawDigit(Numbers &nums,
                Servo &pen)
 {
   switch (digit) {
-    case 0: nums.draw0(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 1: nums.draw1(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 2: nums.draw2(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 3: nums.draw3(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 4: nums.draw4(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 5: nums.draw5(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 6: nums.draw6(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 7: nums.draw7(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 8: nums.draw8(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
-    case 9: nums.draw9(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen); break;
+    case 0: nums.draw0(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 1: nums.draw1(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 2: nums.draw2(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 3: nums.draw3(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 4: nums.draw4(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 5: nums.draw5(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 6: nums.draw6(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 7: nums.draw7(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 8: nums.draw8(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
+    case 9: nums.draw9(stepperLat, stepperLong, place, stepperLat.getPos(), stepperLong.getPos(), pen, penUp, penDown); break;
   }
 }
 

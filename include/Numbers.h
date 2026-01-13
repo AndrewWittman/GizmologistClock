@@ -14,16 +14,16 @@
 class Numbers
 {
 public:
-    void static draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw1(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw2(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw3(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw4(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw5(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw6(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw7(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw8(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
-    void static draw9(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen);
+    void static draw0(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw1(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw2(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw3(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw4(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw5(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw6(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw7(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw8(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
+    void static draw9(Stepper &motorX, Stepper &motorY, Plane numPlace, int currentX, int currentY, Servo &pen, int penUp, int penDown);
     void static relativeMoveX(Stepper &motorX, Plane numPlace, int relX);
 //    void draw1(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
 //    void draw2(Stepper motorX, Stepper motorY, Plane numPlace, int currentX, int currentY);
