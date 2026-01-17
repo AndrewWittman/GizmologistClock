@@ -58,8 +58,8 @@ void Stepper::setLimit(int max) {
 }
 
 void Stepper::calibrate(int minSwitchPin, int maxSwitchPin) {
-  while (!digitalRead(minSwitchPin)) {
-    this->moveDown();
+  while (digitalRead(minSwitchPin)) { // This used to be while (!digitalRead(minSwitchPin)) which would mean while low (waiting for high), 
+    this->moveDown();                 // but now that we're using the internal pull-up resistors, our logic has to flip
   }
 
   for (int i = 0; i < 100; i++) {

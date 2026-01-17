@@ -18,6 +18,7 @@ int lastHour   = -1;
 unsigned long lastMinuteTick = 0;     // last time we advanced the minute (ms)
 const unsigned long minuteMs = 60000; // 60,000 ms in a minute
 
+// TO START COUNTING TIME YOU NEED TO INITIALIZE THE TIME WHEN YOU UPLOAD TO THE CONTROLLER (also this takes like 20 seconds to upload)
 int curHour = 4;   // starting hour
 int curMinute = 39;  // starting minute
 
@@ -93,9 +94,9 @@ void setup() {
   pen.attach(penServoPin);
 
   // Set the pin modes for the limit switches
-  pinMode(latLowSwitch, INPUT);
-  pinMode(latHighSwitch, INPUT);
-  pinMode(longLowSwitch, INPUT);
+  pinMode(latLowSwitch, INPUT_PULLUP); // INPUT initializes normal input pin, INPUT_PULLUP initializes pin with internal pull-up resistor (rests at 5V)
+  pinMode(latHighSwitch, INPUT_PULLUP);
+  pinMode(longLowSwitch, INPUT_PULLUP);
 
 
   delay(500);
@@ -107,7 +108,7 @@ void setup() {
   stepperLat.calibrate(latLowSwitch, latHighSwitch);
 
   
-  digitalWrite(hourHigh,1);
+  digitalWrite(hourHigh,1);  // these 4 lines clear all the panels
   digitalWrite(hourLow,1);
   digitalWrite(minHigh,1);
   digitalWrite(minLow,1);
